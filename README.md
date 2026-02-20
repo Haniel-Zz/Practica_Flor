@@ -1,73 +1,59 @@
-Perfecto 🔥
-Aquí tienes tu documentación **con más diseño estilo README profesional**, con estructura visual, pasos claros, secciones separadas y espacios donde puedes insertar capturas como en el anterior.
-
-Listo para GitHub 👌
-
----
-
-# 🟠 Generacion de Patron Circular en Blender mediante Python
+#  Generacion de Patron Circular en Blender mediante Python
 
 <p align="center">
 Automatizacion de la creacion de multiples circulos distribuidos en forma radial usando scripting en Blender
 </p>
 
----
 
-## 📌 Introduccion
+##  Introduccion
 
-Blender permite generar geometria de manera automatica utilizando Python.
+Blender permite generar geometria automaticamente mediante Python.
 
-En esta practica se crea un **patron circular** compuesto por multiples circulos distribuidos alrededor de un punto central.
+En esta practica se crea un **patron circular** compuesto por multiples circulos distribuidos alrededor de un punto central usando trigonometria.
 
-El posicionamiento se logra mediante el uso de funciones trigonometricas que permiten calcular coordenadas sobre una circunferencia.
 
----
 
-## 🎯 Objetivo
+##  Objetivo
 
 * Crear patrones geometricos automaticamente
 * Aplicar trigonometria en graficos 2D
 * Utilizar ciclos para generar distribucion radial
 * Automatizar la creacion de objetos en Blender
 
----
 
-## 🧠 Fundamento Teorico
 
-Para posicionar cada circulo se utilizan coordenadas polares.
+## Fundamento Teorico
 
-Cada punto se calcula mediante:
+Cada circulo se posiciona usando:
 
 ```
 x = r * cos(angulo)
 y = r * sin(angulo)
 ```
 
-Donde:
-
-* **r** → distancia desde el centro
-* **angulo** → posicion angular
-
-El angulo aumenta progresivamente hasta completar los **360°**, permitiendo distribuir los circulos uniformemente.
+Esto permite distribuir los objetos uniformemente en 360°.
 
 ---
 
-## 🛠️ Requisitos
+##  Requisitos
 
 * Blender 5.0 o superior
 * Espacio de trabajo **Scripting**
 
----
 
-# ⚙️ Procedimiento Paso a Paso
 
----
+#  Procedimiento Paso a Paso
 
-## 🔹 Paso 1: Limpiar la escena
 
-Se eliminan todos los objetos existentes para trabajar en un entorno limpio.
+##  Paso 1: Limpiar la escena
 
-📷 *Inserta aqui captura de la escena inicial*
+![Image](https://docs.blender.org/manual/en/latest/_images/editors_3dview_startup-scene_labels.png)
+
+![Image](https://i.sstatic.net/yiZ9P.png)
+
+![Image](https://i.sstatic.net/bB9Wn.jpg)
+
+![Image](https://i.sstatic.net/tH99S.jpg)
 
 ```python
 bpy.ops.object.select_all(action='SELECT')
@@ -76,11 +62,15 @@ bpy.ops.object.delete()
 
 ---
 
-## 🔹 Paso 2: Definir parametros
+##  Paso 2: Definir parametros
 
-Se establecen los valores que controlan el patron.
+![Image](https://docs.blender.org/manual/en/latest/_images/render_freestyle_python_scripting-mode.png)
 
-📷 *Inserta aqui captura del script con parametros*
+![Image](https://i.sstatic.net/6pVBt.jpg)
+
+![Image](https://devtalk.blender.org/uploads/default/original/3X/f/9/f90567fed12d7fe362ee1d14ecde645bd02b633d.png)
+
+![Image](https://d3a2gvihmbqfjo.cloudfront.net/bd/bd568dbb7e5b06404dffdb7fa5cccc25/bd568dbb7e5b06404dffdb7fa5cccc25.png)
 
 ```python
 radio=3
@@ -88,31 +78,33 @@ angulo_actual=0
 paso_angular=60
 ```
 
-| Parametro     | Funcion                   |
-| ------------- | ------------------------- |
-| radio         | Distancia desde el centro |
-| angulo_actual | Angulo inicial            |
-| paso_angular  | Separacion entre circulos |
 
----
 
-## 🔹 Paso 3: Crear circulo central
+##  Paso 3: Crear circulo central
 
-Este sera el punto base del patron.
+![Image](https://i.sstatic.net/k4Y9W.png)
 
-📷 *Inserta aqui captura del primer circulo*
+![Image](https://docs.blender.org/manual/en/latest/_images/modeling_meshes_primitives_all.png)
+
+![Image](https://blenderartists.org/uploads/default/original/4X/1/e/7/1e70096ed6f4ffaa587e59fc917322451cfe17e2.jpeg)
+
+![Image](https://blenderartists.org/uploads/default/optimized/4X/6/b/c/6bcdd185d071f5cea252ef3645489f9aaf920f00_2_1024x610.png)
 
 ```python
 bpy.ops.mesh.primitive_circle_add(radius=radio, location=(0,0,0), vertices=64)
 ```
 
----
 
-## 🔹 Paso 4: Generar distribucion radial
 
-Se utiliza un ciclo `while` para colocar circulos alrededor del centro.
+##  Paso 4: Generar distribucion radial
 
-📷 *Inserta aqui captura del resultado parcial*
+![Image](https://blenderartists.org/uploads/default/4a55894caa06bc358ba209c03d30880f6837ad41)
+
+![Image](https://i.sstatic.net/4XaaN.png)
+
+![Image](https://i.sstatic.net/cHm50.png)
+
+![Image](https://i.sstatic.net/6SUf9.png)
 
 ```python
 while angulo_actual<360:
@@ -122,27 +114,23 @@ while angulo_actual<360:
     angulo_actual += paso_angular
 ```
 
----
 
-# 💻 Codigo Completo
+
+#  Codigo Completo
 
 ```python
 import bpy
 import math
 
-# limpia escena
 bpy.ops.object.select_all(action='SELECT')
 bpy.ops.object.delete()
 
-# parametros de la figura
 radio=3
 angulo_actual=0
 paso_angular=60
 
-# circulo central
 bpy.ops.mesh.primitive_circle_add(radius=radio, location=(0,0,0), vertices=64)
 
-# ciclo radial
 while angulo_actual<360:
     x=radio*math.cos(math.radians(angulo_actual))
     y=radio*math.sin(math.radians(angulo_actual))
@@ -150,68 +138,53 @@ while angulo_actual<360:
     angulo_actual += paso_angular
 ```
 
----
 
-# 🟢 Resultado
+
+#  Resultado Final
+
+![Image](https://public.blenderkit.com/thumbnails/assets/5b76a412a44f41c695a382a052b3d9d5/files/thumbnail_b5e5d9d0-2321-48ae-aef3-f7530792b23d.jpg.256x256_q85.jpg.webp?webp_generated=1766444420)
+
+![Image](https://blenderartists.org/uploads/default/optimized/4X/8/a/0/8a09b708d54b004c1d6657ec49e6954018ad8426_2_1024x604.jpeg)
+
+![Image](https://i.sstatic.net/k4Y9W.png)
+
+![Image](https://blenderartists.org/uploads/default/b193f6d372a8a580e347ff3490869e238ff6f7d0)
 
 El script genera:
 
-✔ Un circulo central
-✔ Seis circulos adicionales
-✔ Distribucion uniforme cada 60°
+ Un circulo central
+ Seis circulos adicionales
+ Distribucion uniforme cada 60°
 
-📷 *Inserta aqui captura del patron final*
 
----
 
-# 🎛️ Personalizacion
+#  Personalizacion
 
-### Cambiar separacion angular
+Cambiar separacion angular:
 
 ```python
 paso_angular=45
 ```
 
-Generara 8 circulos.
-
----
-
-### Cambiar distancia
+Cambiar tamaño:
 
 ```python
 radio=5
 ```
 
-Aumenta el tamaño del patron.
+---
+
+#  Ejemplos
+
+| Paso Angular | Cantidad |
+| ------------ | -------- |
+| 60°          | 6        |
+| 45°          | 8        |
+| 30°          | 12       |
 
 ---
 
-# 📊 Ejemplos
+#  Conclusiones
 
-| Paso Angular | Resultado   |
-| ------------ | ----------- |
-| 60°          | 6 circulos  |
-| 45°          | 8 circulos  |
-| 30°          | 12 circulos |
+Este script demuestra como Blender puede automatizar la creacion de patrones geometricos utilizando matematicas y programacion.
 
----
-
-# ✅ Conclusiones
-
-Este script demuestra como Blender puede utilizarse para:
-
-* Crear patrones geometricos
-* Automatizar modelado
-* Aplicar matematicas en graficos
-
-Permitiendo generar estructuras visuales complejas mediante programacion.
-
----
-
-Si quieres, tambien puedo darte:
-
-⭐ Version para informe escolar
-⭐ Version con diagrama de flujo
-⭐ Version que genere patron 3D
-
-Solo dime 😉
